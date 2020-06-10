@@ -7,6 +7,10 @@ const MAX_SPEED = 80
 #var that repsenets the change of x.y position
 var velocity = Vector2.ZERO
 
+#getting access to animation node by $ sign and cretion of onready variable
+onready var animationPlayer = $AnimationPlayer
+
+
 #move char
 #we create a funftion for physics conut per tic and create input vector var that
 #is equal 0 by default
@@ -18,8 +22,14 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
+		if input_vector.x > 0:
+			animationPlayer.play("RunRight")
+		else: 
+			animationPlayer.play("RunLeft")
+		
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
+		animationPlayer.play("IdleRight")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	velocity = move_and_slide(velocity)
