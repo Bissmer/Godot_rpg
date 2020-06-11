@@ -23,6 +23,7 @@ func _physics_process(delta):
 	#we normalize vector to make diagonal moving the same speed as the hor or vertical
 	input_vector = input_vector.normalized()
 	
+	#movement and animation
 	if input_vector != Vector2.ZERO:
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
